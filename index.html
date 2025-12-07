@@ -150,6 +150,7 @@
 
         // FilterSettings Component
         const FilterSettings = ({ setCurrentPage, currentPage, setShowUserProfile }) => {
+            const [subNavOpen, setSubNavOpen] = useState(false);
             const [keywords, setKeywords] = useState(['Дизайнер', 'UX/UI']);
             const [keywordInput, setKeywordInput] = useState('');
             const [excludeWords, setExcludeWords] = useState([]);
@@ -297,30 +298,79 @@
 
                     {/* Sub Navigation */}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-                        <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 overflow-x-auto pb-2 -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+                        {/* Mobile Dropdown */}
+                        <div className="sm:hidden">
+                            <button
+                                onClick={() => setSubNavOpen(!subNavOpen)}
+                                className="w-full flex items-center justify-between px-4 py-3 bg-white shadow-lg shadow-blue-500/10 rounded-lg font-medium text-blue-600 border border-blue-200"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M3 6h18M7 12h10M10 18h4" strokeWidth="2" strokeLinecap="round"/>
+                                    </svg>
+                                    <span>Фильтры</span>
+                                </div>
+                                <svg 
+                                    className={`w-5 h-5 transition-transform duration-200 ${subNavOpen ? 'rotate-180' : ''}`}
+                                    fill="none" 
+                                    viewBox="0 0 24 24" 
+                                    stroke="currentColor"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            {subNavOpen && (
+                                <div className="mt-2 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden">
+                                    <button 
+                                        onClick={() => {
+                                            setCurrentPage('resume');
+                                            setSubNavOpen(false);
+                                        }}
+                                        className="w-full flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-left"
+                                    >
+                                        <FileText className="w-4 h-4" />
+                                        <span>Выбор резюме</span>
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            setCurrentPage('templates');
+                                            setSubNavOpen(false);
+                                        }}
+                                        className="w-full flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-left"
+                                    >
+                                        <Settings className="w-4 h-4" />
+                                        <span>Конструктор сопроводительного</span>
+                                    </button>
+                                    <button 
+                                        className="w-full flex items-center gap-2 px-4 py-3 bg-blue-50 text-blue-600 font-medium"
+                                    >
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M3 6h18M7 12h10M10 18h4" strokeWidth="2" strokeLinecap="round"/>
+                                        </svg>
+                                        <span>Настройки фильтров</span>
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        {/* Desktop Navigation */}
+                        <div className="hidden sm:flex items-center gap-2 sm:gap-4 lg:gap-6">
                             <button 
                                 onClick={() => setCurrentPage('resume')}
                                 className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base hover:bg-white/60 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0">
                                 <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                <span className="hidden sm:inline">Выбор резюме</span>
-                                <span className="sm:hidden">Резюме</span>
+                                <span>Выбор резюме</span>
                             </button>
                             <button 
                                 onClick={() => setCurrentPage('templates')}
                                 className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base hover:bg-white/60 rounded-lg transition-all duration-200 flex-shrink-0">
                                 <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                                <span className="hidden sm:inline whitespace-nowrap">Конструктор сопроводительного</span>
-                                <span className="sm:hidden leading-tight text-center">
-                                    <span className="block">Конструктор</span>
-                                    <span className="block">сопроводительных</span>
-                                </span>
+                                <span className="whitespace-nowrap">Конструктор сопроводительного</span>
                             </button>
-                            <button className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base bg-white shadow-lg shadow-blue-500/10 rounded-lg font-medium text-blue-600 border border-blue-200 whitespace-nowrap flex-shrink-0 ml-1 sm:ml-0">
+                            <button className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base bg-white shadow-lg shadow-blue-500/10 rounded-lg font-medium text-blue-600 border border-blue-200 whitespace-nowrap flex-shrink-0">
                                 <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path d="M3 6h18M7 12h10M10 18h4" strokeWidth="2" strokeLinecap="round"/>
                                 </svg>
-                                <span className="hidden sm:inline">Настройки фильтров</span>
-                                <span className="sm:hidden">Фильтры</span>
+                                <span>Настройки фильтров</span>
                             </button>
                         </div>
                     </div>
@@ -806,6 +856,7 @@
 
         // Cover Letter Templates Component
         const CoverLetterTemplates = ({ setCurrentPage, setShowUserProfile }) => {
+            const [subNavOpen, setSubNavOpen] = useState(false);
             const [activeTemplates, setActiveTemplates] = useState([1]);
             const [expandedTemplates, setExpandedTemplates] = useState([]);
             const [selectedExample, setSelectedExample] = useState(null);
@@ -1102,34 +1153,80 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
                         </div>
                     </nav>
 
-                    {/* Sub Navigation - ГОРИЗОНТАЛЬНОЕ МЕНЮ */}
+                    {/* Sub Navigation */}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-                        <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 overflow-x-auto pb-2 -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+                        {/* Mobile Dropdown */}
+                        <div className="sm:hidden">
+                            <button
+                                onClick={() => setSubNavOpen(!subNavOpen)}
+                                className="w-full flex items-center justify-between px-4 py-3 bg-white shadow-lg shadow-blue-500/10 rounded-lg font-medium text-blue-600 border border-blue-200"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <Settings className="w-4 h-4" />
+                                    <span>Конструктор сопроводительного</span>
+                                </div>
+                                <svg 
+                                    className={`w-5 h-5 transition-transform duration-200 ${subNavOpen ? 'rotate-180' : ''}`}
+                                    fill="none" 
+                                    viewBox="0 0 24 24" 
+                                    stroke="currentColor"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            {subNavOpen && (
+                                <div className="mt-2 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden">
+                                    <button 
+                                        onClick={() => {
+                                            setCurrentPage('resume');
+                                            setSubNavOpen(false);
+                                        }}
+                                        className="w-full flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-left"
+                                    >
+                                        <FileText className="w-4 h-4" />
+                                        <span>Выбор резюме</span>
+                                    </button>
+                                    <button 
+                                        className="w-full flex items-center gap-2 px-4 py-3 bg-blue-50 text-blue-600 font-medium"
+                                    >
+                                        <Settings className="w-4 h-4" />
+                                        <span>Конструктор сопроводительного</span>
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            setCurrentPage('filters');
+                                            setSubNavOpen(false);
+                                        }}
+                                        className="w-full flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-left"
+                                    >
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M3 6h18M7 12h10M10 18h4" strokeWidth="2" strokeLinecap="round"/>
+                                        </svg>
+                                        <span>Настройки фильтров</span>
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        {/* Desktop Navigation */}
+                        <div className="hidden sm:flex items-center gap-2 sm:gap-4 lg:gap-6">
                             <button 
                                 onClick={() => setCurrentPage('resume')}
                                 className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base hover:bg-white/60 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0">
                                 <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                <span className="hidden sm:inline">Выбор резюме</span>
-                                <span className="sm:hidden">Резюме</span>
+                                <span>Выбор резюме</span>
                             </button>
                             <button 
-                                onClick={() => setCurrentPage('templates')}
                                 className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base bg-white shadow-lg shadow-blue-500/10 rounded-lg font-medium text-blue-600 border border-blue-200 flex-shrink-0">
                                 <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                                <span className="hidden sm:inline whitespace-nowrap">Конструктор сопроводительного</span>
-                                <span className="sm:hidden leading-tight text-center">
-                                    <span className="block">Конструктор</span>
-                                    <span className="block">сопроводительных</span>
-                                </span>
+                                <span className="whitespace-nowrap">Конструктор сопроводительного</span>
                             </button>
                             <button 
                                 onClick={() => setCurrentPage('filters')}
-                                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base hover:bg-white/60 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ml-1 sm:ml-0">
+                                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base hover:bg-white/60 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0">
                                 <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path d="M3 6h18M7 12h10M10 18h4" strokeWidth="2" strokeLinecap="round"/>
                                 </svg>
-                                <span className="hidden sm:inline">Настройки фильтров</span>
-                                <span className="sm:hidden">Фильтры</span>
+                                <span>Настройки фильтров</span>
                             </button>
                         </div>
                     </div>
@@ -1468,6 +1565,7 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
 
         // Calendar Component - БЕЗ ИЗМЕНЕНИЙ
         const CalendarView = ({ setCurrentPage, setShowUserProfile }) => {
+            const [subNavOpen, setSubNavOpen] = useState(false);
             const [interviews] = useState([
                 { day: 10, dayName: 'Пн', time: '11:00', status: 'confirmed' },
                 { day: 11, dayName: 'Вт', time: '15:30', status: 'pending' },
@@ -1554,25 +1652,25 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
                     </nav>
 
                     {/* Main Content */}
-                    <div className="max-w-7xl mx-auto px-8 py-12">
-                        <div className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl shadow-blue-500/10 p-10 border border-white/60">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-12">
+                        <div className="bg-white/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-500/10 p-4 sm:p-6 lg:p-10 border border-white/60">
                             {/* Header */}
-                            <div className="flex items-center justify-between mb-10">
-                                <h2 className="text-4xl font-bold text-slate-800">Календарь интервью (2 недели)</h2>
-                                <div className="flex items-center gap-6">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-10 gap-4">
+                                <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-slate-800">Календарь интервью (2 недели)</h2>
+                                <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
                                     <div className="flex items-center gap-2">
-                                        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-emerald-400 to-green-500"></div>
-                                        <span className="text-sm font-medium text-slate-600">Подтвержден</span>
+                                        <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-gradient-to-r from-emerald-400 to-green-500"></div>
+                                        <span className="text-xs sm:text-sm font-medium text-slate-600">Подтвержден</span>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-amber-400 to-orange-500"></div>
-                                        <span className="text-sm font-medium text-slate-600">Ожидает</span>
+                                        <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-gradient-to-r from-amber-400 to-orange-500"></div>
+                                        <span className="text-xs sm:text-sm font-medium text-slate-600">Ожидает</span>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Calendar Grid */}
-                            <div className="grid grid-cols-7 gap-4 mb-8">
+                            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-3 lg:gap-4 mb-6 sm:mb-8">
                                 {calendarDays.map((day, index) => {
                                     const interview = getInterviewForDay(day);
                                     const dayName = weekDays[index % 7];
@@ -1580,17 +1678,17 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
                                     return (
                                         <div 
                                             key={day}
-                                            className={`bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 border-2 transition-all duration-300 hover:shadow-lg ${
+                                            className={`bg-gradient-to-br from-slate-50 to-white rounded-lg sm:rounded-xl lg:rounded-2xl p-3 sm:p-4 lg:p-6 border-2 transition-all duration-300 hover:shadow-lg ${
                                                 interview ? 'border-cyan-200 hover:border-cyan-300' : 'border-slate-100'
                                             }`}
                                         >
-                                            <div className="text-center mb-4">
-                                                <div className="text-sm font-medium text-slate-500 mb-1">{dayName}</div>
-                                                <div className="text-3xl font-bold text-slate-800">{day}</div>
+                                            <div className="text-center mb-2 sm:mb-4">
+                                                <div className="text-xs sm:text-sm font-medium text-slate-500 mb-0.5 sm:mb-1">{dayName}</div>
+                                                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800">{day}</div>
                                             </div>
                                             
                                             {interview && (
-                                                <div className={`px-4 py-2 rounded-full text-center font-bold text-white shadow-lg transform hover:scale-105 transition-all duration-300 ${
+                                                <div className={`px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 rounded-full text-center font-bold text-white shadow-lg transform hover:scale-105 transition-all duration-300 text-xs sm:text-sm ${
                                                     interview.status === 'confirmed'
                                                         ? 'bg-gradient-to-r from-emerald-400 to-green-500'
                                                         : 'bg-gradient-to-r from-amber-400 to-orange-500'
@@ -1604,11 +1702,11 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
                             </div>
 
                             {/* Action Buttons */}
-                            <div className="flex gap-4 flex-wrap">
-                                <button className="flex-1 min-w-[250px] px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02]">
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                                <button className="flex-1 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-[1.02]">
                                     Синк с Google/Outlook
                                 </button>
-                                <button className="flex-1 min-w-[250px] px-8 py-4 bg-slate-100 text-slate-700 rounded-xl font-bold text-lg hover:bg-slate-200 transition-all duration-300 transform hover:scale-[1.02]">
+                                <button className="flex-1 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-slate-100 text-slate-700 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg hover:bg-slate-200 transition-all duration-300 transform hover:scale-[1.02]">
                                     Предложить другое время
                                 </button>
                             </div>
@@ -1620,6 +1718,7 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
 
         // Resume Selection Component
         const ResumeSelection = ({ setCurrentPage, setShowUserProfile }) => {
+            const [subNavOpen, setSubNavOpen] = useState(false);
             const [resumes, setResumes] = useState([
                 {
                     id: 1,
@@ -1726,32 +1825,78 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
 
                     {/* Sub Navigation */}
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-                        <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 overflow-x-auto pb-2 -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+                        {/* Mobile Dropdown */}
+                        <div className="sm:hidden">
+                            <button
+                                onClick={() => setSubNavOpen(!subNavOpen)}
+                                className="w-full flex items-center justify-between px-4 py-3 bg-white shadow-lg shadow-blue-500/10 rounded-lg font-medium text-blue-600 border border-blue-200"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <FileText className="w-4 h-4" />
+                                    <span>Выбор резюме</span>
+                                </div>
+                                <svg 
+                                    className={`w-5 h-5 transition-transform duration-200 ${subNavOpen ? 'rotate-180' : ''}`}
+                                    fill="none" 
+                                    viewBox="0 0 24 24" 
+                                    stroke="currentColor"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            {subNavOpen && (
+                                <div className="mt-2 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden">
+                                    <button 
+                                        className="w-full flex items-center gap-2 px-4 py-3 bg-blue-50 text-blue-600 font-medium"
+                                    >
+                                        <FileText className="w-4 h-4" />
+                                        <span>Выбор резюме</span>
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            setCurrentPage('templates');
+                                            setSubNavOpen(false);
+                                        }}
+                                        className="w-full flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-left"
+                                    >
+                                        <Settings className="w-4 h-4" />
+                                        <span>Конструктор сопроводительного</span>
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            setCurrentPage('filters');
+                                            setSubNavOpen(false);
+                                        }}
+                                        className="w-full flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-left"
+                                    >
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M3 6h18M7 12h10M10 18h4" strokeWidth="2" strokeLinecap="round"/>
+                                        </svg>
+                                        <span>Настройки фильтров</span>
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        {/* Desktop Navigation */}
+                        <div className="hidden sm:flex items-center gap-2 sm:gap-4 lg:gap-6">
                             <button 
-                                onClick={() => setCurrentPage('resume')}
                                 className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base bg-white shadow-lg shadow-blue-500/10 rounded-lg font-medium text-blue-600 border border-blue-200 whitespace-nowrap flex-shrink-0">
                                 <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                <span className="hidden sm:inline">Выбор резюме</span>
-                                <span className="sm:hidden">Резюме</span>
+                                <span>Выбор резюме</span>
                             </button>
                             <button 
                                 onClick={() => setCurrentPage('templates')}
                                 className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base hover:bg-white/60 rounded-lg transition-all duration-200 flex-shrink-0">
                                 <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                                <span className="hidden sm:inline whitespace-nowrap">Конструктор сопроводительного</span>
-                                <span className="sm:hidden leading-tight text-center">
-                                    <span className="block">Конструктор</span>
-                                    <span className="block">сопроводительных</span>
-                                </span>
+                                <span className="whitespace-nowrap">Конструктор сопроводительного</span>
                             </button>
                             <button 
                                 onClick={() => setCurrentPage('filters')}
-                                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base hover:bg-white/60 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ml-1 sm:ml-0">
+                                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs sm:text-sm lg:text-base hover:bg-white/60 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0">
                                 <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path d="M3 6h18M7 12h10M10 18h4" strokeWidth="2" strokeLinecap="round"/>
                                 </svg>
-                                <span className="hidden sm:inline">Настройки фильтров</span>
-                                <span className="sm:hidden">Фильтры</span>
+                                <span>Настройки фильтров</span>
                             </button>
                         </div>
                     </div>
