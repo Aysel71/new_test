@@ -266,19 +266,31 @@
                                 <div className="flex items-center gap-6">
                                     <button 
                                         onClick={() => setCurrentPage('filters')}
-                                        className="flex items-center gap-2 px-4 py-2 text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-200 font-medium">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'filters' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Settings className="w-4 h-4" />
                                         <span className="hidden lg:inline">Настройки откликов</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('calendar')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'calendar' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Calendar className="w-4 h-4" />
                                         <span className="hidden lg:inline">Календарь</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('applications')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'applications' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <FileText className="w-4 h-4" />
                                         <span className="hidden lg:inline">Отклики</span>
                                     </button>
@@ -585,7 +597,7 @@
         };
 
         // Applications Component - С ИЗМЕНЕНИЯМИ
-        const Applications = ({ setCurrentPage, setShowUserProfile }) => {
+        const Applications = ({ setCurrentPage, currentPage, setShowUserProfile }) => {
             const [applications, setApplications] = useState([
                 {
                     id: 1,
@@ -687,19 +699,31 @@
                                 <div className="flex items-center gap-6">
                                     <button 
                                         onClick={() => setCurrentPage('filters')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'filters' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Settings className="w-4 h-4" />
                                         <span className="hidden lg:inline">Настройки откликов</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('calendar')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'calendar' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Calendar className="w-4 h-4" />
                                         <span className="hidden lg:inline">Календарь</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('applications')}
-                                        className="flex items-center gap-2 px-4 py-2 text-purple-600 bg-purple-50 rounded-lg font-medium">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'applications' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <FileText className="w-4 h-4" />
                                         <span className="hidden lg:inline">Отклики</span>
                                     </button>
@@ -855,7 +879,7 @@
         };
 
         // Cover Letter Templates Component
-        const CoverLetterTemplates = ({ setCurrentPage, setShowUserProfile }) => {
+        const CoverLetterTemplates = ({ setCurrentPage, currentPage, setShowUserProfile }) => {
             const [subNavOpen, setSubNavOpen] = useState(false);
             const [activeTemplates, setActiveTemplates] = useState([1]);
             const [expandedTemplates, setExpandedTemplates] = useState([]);
@@ -1123,19 +1147,31 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
                                 <div className="flex items-center gap-4">
                                     <button 
                                         onClick={() => setCurrentPage('filters')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'filters' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Settings className="w-4 h-4" />
                                         <span className="hidden lg:inline">Настройки откликов</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('calendar')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'calendar' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Calendar className="w-4 h-4" />
                                         <span className="hidden lg:inline">Календарь</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('applications')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'applications' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <FileText className="w-4 h-4" />
                                         <span className="hidden lg:inline">Отклики</span>
                                     </button>
@@ -1564,7 +1600,7 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
         };
 
         // Calendar Component - БЕЗ ИЗМЕНЕНИЙ
-        const CalendarView = ({ setCurrentPage, setShowUserProfile }) => {
+        const CalendarView = ({ setCurrentPage, currentPage, setShowUserProfile }) => {
             const [subNavOpen, setSubNavOpen] = useState(false);
             const [interviews] = useState([
                 { day: 10, dayName: 'Пн', time: '11:00', status: 'confirmed' },
@@ -1621,19 +1657,31 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
                                 <div className="flex items-center gap-6">
                                     <button 
                                         onClick={() => setCurrentPage('filters')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'filters' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Settings className="w-4 h-4" />
                                         <span className="hidden lg:inline">Настройки откликов</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('calendar')}
-                                        className="flex items-center gap-2 px-4 py-2 text-blue-600 bg-blue-50 rounded-lg font-medium">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'calendar' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Calendar className="w-4 h-4" />
                                         <span className="hidden lg:inline">Календарь</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('applications')}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'applications' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <FileText className="w-4 h-4" />
                                         <span className="hidden lg:inline">Отклики</span>
                                     </button>
@@ -1717,7 +1765,7 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
         };
 
         // Resume Selection Component
-        const ResumeSelection = ({ setCurrentPage, setShowUserProfile }) => {
+        const ResumeSelection = ({ setCurrentPage, currentPage, setShowUserProfile }) => {
             const [subNavOpen, setSubNavOpen] = useState(false);
             const [resumes, setResumes] = useState([
                 {
@@ -1793,19 +1841,31 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
                                 <div className="flex items-center gap-2 sm:gap-4">
                                     <button 
                                         onClick={() => setCurrentPage('filters')}
-                                        className="flex items-center gap-2 px-2 sm:px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'filters' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Settings className="w-4 h-4" />
                                         <span className="hidden lg:inline">Настройки откликов</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('calendar')}
-                                        className="flex items-center gap-2 px-2 sm:px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'calendar' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <Calendar className="w-4 h-4" />
                                         <span className="hidden lg:inline">Календарь</span>
                                     </button>
                                     <button 
                                         onClick={() => setCurrentPage('applications')}
-                                        className="flex items-center gap-2 px-2 sm:px-4 py-2 hover:bg-slate-100 rounded-lg transition-all duration-200">
+                                        className={`flex items-center gap-2 px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 ${
+                                            currentPage === 'applications' 
+                                                ? 'text-blue-600 bg-blue-50 font-medium' 
+                                                : 'hover:bg-slate-100'
+                                        }`}>
                                         <FileText className="w-4 h-4" />
                                         <span className="hidden lg:inline">Отклики</span>
                                     </button>
@@ -2155,11 +2215,11 @@ ArchiCAD, Revit, BIM-координация. Привык к срокам и к 
                         <UserProfile onClose={() => setShowUserProfile(false)} />
                     ) : (
                         <>
-                            {currentPage === 'filters' && <FilterSettings setCurrentPage={setCurrentPage} setShowUserProfile={setShowUserProfile} />}
-                            {currentPage === 'applications' && <Applications setCurrentPage={setCurrentPage} setShowUserProfile={setShowUserProfile} />}
-                            {currentPage === 'calendar' && <CalendarView setCurrentPage={setCurrentPage} setShowUserProfile={setShowUserProfile} />}
-                            {currentPage === 'templates' && <CoverLetterTemplates setCurrentPage={setCurrentPage} setShowUserProfile={setShowUserProfile} />}
-                            {currentPage === 'resume' && <ResumeSelection setCurrentPage={setCurrentPage} setShowUserProfile={setShowUserProfile} />}
+                            {currentPage === 'filters' && <FilterSettings setCurrentPage={setCurrentPage} currentPage={currentPage} setShowUserProfile={setShowUserProfile} />}
+                            {currentPage === 'applications' && <Applications setCurrentPage={setCurrentPage} currentPage={currentPage} setShowUserProfile={setShowUserProfile} />}
+                            {currentPage === 'calendar' && <CalendarView setCurrentPage={setCurrentPage} currentPage={currentPage} setShowUserProfile={setShowUserProfile} />}
+                            {currentPage === 'templates' && <CoverLetterTemplates setCurrentPage={setCurrentPage} currentPage={currentPage} setShowUserProfile={setShowUserProfile} />}
+                            {currentPage === 'resume' && <ResumeSelection setCurrentPage={setCurrentPage} currentPage={currentPage} setShowUserProfile={setShowUserProfile} />}
                         </>
                     )}
                 </div>
